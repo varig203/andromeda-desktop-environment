@@ -47,6 +47,9 @@ name = "andromeda-desktop-environment"
 version = "0.0.0"
 dependencies = [
  "smithay",
+ "tracing",
+ "wayland-client",
+ "wayland-protocols",
 ]
 
 [[package]]

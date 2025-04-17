@@ -6,3 +6,6 @@ authors = ["Daniel T-B"]
 
 [dependencies]
 smithay = "0.5.1"
+tracing = { version = "0.1", features = ["max_level_trace", "release_max_level_debug"] }
+wayland-client = "0.31.8"  # Wayland client bindings
+wayland-protocols = "0.32.6"  # Common protocols for Wayland
