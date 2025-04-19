@@ -1,11 +1,15 @@
 static POSSIBLE_BACKENDS: &[&str] = &[
     #[cfg(feature = "winit")]
-    "--winit : Run anvil as a X11 or Wayland client using winit.",
+    "--winit : Run ADE as a X11 or Wayland client using winit.",
     #[cfg(feature = "udev")]
-    "--tty-udev : Run anvil as a tty udev client (requires root if without logind).",
+    "--tty-udev : Run ADE as a tty udev client (requires root if without logind).",
     #[cfg(feature = "x11")]
-    "--x11 : Run anvil as an X11 client.",
+    "--x11 : Run ADE as an X11 client.",
 ];
+
+use andromeda_desktop_environment::winit;
+use andromeda_desktop_environment::udev;
+use andromeda_desktop_environment::x11;
 
 #[cfg(feature = "profile-with-tracy-mem")]
 #[global_allocator]
@@ -36,18 +40,18 @@ fn main() {
     match arg.as_ref().map(|s| &s[..]) {
         #[cfg(feature = "winit")]
         Some("--winit") => {
-            tracing::info!("Starting anvil with winit backend");
-            anvil::winit::run_winit();
+            tracing::info!("Starting ADE with winit backend");
+            crate::winit::run_winit();
         }
         #[cfg(feature = "udev")]
         Some("--tty-udev") => {
-            tracing::info!("Starting anvil on a tty using udev");
-            anvil::udev::run_udev();
+            tracing::info!("Starting ADE on a tty using udev");
+            crate::udev::run_udev();
         }
         #[cfg(feature = "x11")]
         Some("--x11") => {
-            tracing::info!("Starting anvil with x11 backend");
-            anvil::x11::run_x11();
+            tracing::info!("Starting ADE with x11 backend");
+            crate::x11::run_x11();
         }
         Some(other) => {
             tracing::error!("Unknown backend: {}", other);
